@@ -1,8 +1,8 @@
-''' 1. Before applying Liskov's Substition Principle.
-    2. This principle states that objects of a superclass should be replaceable with
-     objects of a subclass without affecting the correctness of the program.
-     In other words, derived classes must be substitutable for their base classes
-     without altering the desirable properties of the program.'''
+''' ISP suggests that clients should not be forced to depend on interfaces
+    they don't use. Instead of creating large interfaces that cater to all
+    possible client needs, ISP advocates for smaller, more specific interfaces
+    tailored to the requirements of individual clients.
+    This prevents the clients from being burdened with unnecessary dependencies.'''
 
 from abc import ABC,abstractmethod
 
@@ -31,15 +31,26 @@ class PaymentProcessor(ABC):
     def pay(self,order):
         pass
 
+    @abstractmethod
+    def sms_auth(self,code):
+        pass
 
 class PaymentProcessorDebit(PaymentProcessor):
     def __init__(self,security_code):
         self.security_code = security_code
+        self.verified = False
+
+    def sms_auth(self,code):
+        print(f"Verifying SMS code {code}")
+        self.verified = "True"
 
     def pay(self,order):
+        if not self.verified:
+            raise Exception("Not authorized")
         print("Debit payment is processing...")
         print(f"Verifying Security code {self.security_code}")
         self.status = 'paid'
+
 
 class PaymentProcessorCredit(PaymentProcessor):
     def __init__(self,security_code):
@@ -54,11 +65,19 @@ class PaymentProcessorPaypal(PaymentProcessor):
 
     def __init__(self,email):
         self.email = email
+        self.verified = False
+
+    def sms_auth(self,code):
+        print(f"Verifying SMS code {code}")
+        self.verified = "True"
 
     def pay(self,order):
+        if not self.verified:
+            raise Exception("Not authorized")
         print("Paypal payment is processing...")
         print(f"Verifying email address  {self.email}")
         self.status = 'paid'
+
 
 
 order = Order()
@@ -67,5 +86,6 @@ order.add_item("cookies",100,3)
 order.add_item('Cigerattes',100,2)
 
 print(order.total_price())
-processor = PaymentProcessorPaypal('abc@gmail.com')
+processor = PaymentProcessorDebit('212121')
+processor.sms_auth(54321)
 processor.pay(order)

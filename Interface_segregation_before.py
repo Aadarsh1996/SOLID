@@ -1,8 +1,8 @@
-''' 1. Before applying Liskov's Substition Principle.
-    2. This principle states that objects of a superclass should be replaceable with
-     objects of a subclass without affecting the correctness of the program.
-     In other words, derived classes must be substitutable for their base classes
-     without altering the desirable properties of the program.'''
+''' ISP suggests that clients should not be forced to depend on interfaces
+    they don't use. Instead of creating large interfaces that cater to all
+    possible client needs, ISP advocates for smaller, more specific interfaces
+    tailored to the requirements of individual clients.
+    This prevents the clients from being burdened with unnecessary dependencies.'''
 
 from abc import ABC,abstractmethod
 

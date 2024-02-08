@@ -21,11 +21,11 @@ class Order:
 
 
 class PaymentProcessor:
-    def pay_debit(self,order,security_code):
+    def pay_debit(self,security_code):
         print("Debit payment is processing...")
         print(f"Verifying Security code {security_code}")
         self.status = 'paid'
-    def pay_credit(self,order,security_code):
+    def pay_credit(self,security_code):
         print("Credit payment is processing...")
         print(f"Verifying Security code {security_code}")
         self.status = 'paid'
@@ -39,4 +39,4 @@ order.add_item('Cigerattes',100,2)
 
 print(order.total_price())
 pay = PaymentProcessor()
-pay.pay_debit(order,123456)
+pay.pay_debit(123456)

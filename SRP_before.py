@@ -1,4 +1,5 @@
-'''Here all the functionalities are defined in one class which violates Single Responsibility Principle'''
+''' 1. Here all the functionalities are defined in one class which violates Single Responsibility Principle.
+    2. A class can have only single responsibility'''
 
 class Order:
 

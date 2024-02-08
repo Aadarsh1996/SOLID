@@ -1,8 +1,7 @@
-''' 1. Before applying Open Closed Principle.
-    2. The Open/Closed Principle states that software entities (classes, modules, functions, etc.)
-    should be open for extension but closed for modification.
-    In other words, you should be able to extend the behavior of a module without modifying its source code.
-    This is typically achieved through abstraction and polymorphism.'''
+'''  this principle states that objects of a superclass should be replaceable with
+     objects of a subclass without affecting the correctness of the program.
+     In other words, derived classes must be substitutable for their base classes
+     without altering the desirable properties of the program.'''
 
 from abc import ABC,abstractmethod
 
