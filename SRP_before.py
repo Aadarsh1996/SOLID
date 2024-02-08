@@ -1,3 +1,5 @@
+'''Here all the functionalities are defined in one class which violates Single Responsibility Principle'''
+
 class Order:
 
     def __init__(self):
